@@ -1,9 +1,11 @@
 package com.example.sifarisservice.cllient.dto.request;
 
 public class SifarisSayRequset {
-     Integer sifarisSay;
+     private Integer sifarisSay;
+
 
     public SifarisSayRequset(Integer sifarisSay) {
+        this.sifarisSay = sifarisSay;
     }
 
     public Integer getSifarisSay() {

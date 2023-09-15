@@ -1,6 +1,7 @@
 package com.example.sifarisservice.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,14 @@ public class Sifaris {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotNull(message = "bos ola bilmez")
 
     private String SifarisMarka;
+    @NotNull(message = "bos ola bilmez")
     private String SifarisKatiqoriya;
+    @NotNull(message = "bos ola bilmez")
     private Integer sifarisSay;
+    private  Long sifirId;
 
 
 //

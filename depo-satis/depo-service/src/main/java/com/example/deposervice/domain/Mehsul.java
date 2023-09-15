@@ -1,6 +1,7 @@
 package com.example.deposervice.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Mehsullar")

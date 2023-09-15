@@ -3,6 +3,8 @@ package com.example.deposervice.service;
 import com.example.deposervice.dto.requset.MehsulRequset;
 import com.example.deposervice.dto.requset.SifarisSayRequset;
 import com.example.deposervice.dto.response.MehsulReponse;
+import com.example.deposervice.exeption.MehsulNotFound;
+import com.example.deposervice.exeption.SifarisNotFound;
 import com.example.deposervice.mapper.MehsulMapper;
 import com.example.deposervice.repository.MehsulRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +22,19 @@ public class MehsulService {
     }
 
     public  MehsulReponse update(Long id,MehsulRequset requset){
-        var entitiy =mehsulRepository.findById(id).orElseThrow(() ->  new RuntimeException("bazada mehsul yoxdu"));
+        var entitiy =mehsulRepository.findById(id).orElseThrow(() ->  new MehsulNotFound("bele bir mehul movcud deyil"));
         entitiy=mapper.mehsulRequsetToMehsul(requset);
         entitiy.setId(id);
         return  mapper.mehstuToMehsulReponse(entitiy);
     }
     public MehsulReponse getByMehsulId(Long id){
+        var yoxla =mehsulRepository.findById(id).orElseThrow(()->new SifarisNotFound("bele bir mehsul movcud deyil"));
         var mehsul = mehsulRepository.findById(id).get();
+
+
+
+
+
         return mapper.mehstuToMehsulReponse(mehsul);
     }
     public void  dele(Long id){
@@ -34,20 +42,22 @@ public class MehsulService {
     }
 
     public MehsulReponse getMehsulByMarka(String marka){
-        var mehsul = mehsulRepository.getMehsulByMarka(marka).orElseThrow(()-> new RuntimeException("bazada bu marka yoxdu"));
+        var mehsul = mehsulRepository.getMehsulByMarka(marka).orElseThrow(()-> new MehsulNotFound("bele bir mehul movcud deyil"));
         return  mapper.mehstuToMehsulReponse(mehsul);
     }
 
-    public  void  udateSay(SifarisSayRequset requset,String marka){
-
-
-        var mehsul =mehsulRepository.getMehsulByMarka(marka).orElseThrow(()-> new RuntimeException("bazada bu marka yoxdu"));
-        var say = mehsul.getSay()-requset.getSifarisSay();
+    public void updateSay(SifarisSayRequset requset,String marka){
+        var mehsul=mehsulRepository.getMehsulByMarka(marka).orElseThrow(()-> new MehsulNotFound("bele bir mehsul movcud deyil"));
+        var say =mehsul.getSay() - requset.getSifarisSay();
         mehsul.setSay(say);
-
         mehsulRepository.save(mehsul);
 
+
     }
+
+
+
+
 
 
 

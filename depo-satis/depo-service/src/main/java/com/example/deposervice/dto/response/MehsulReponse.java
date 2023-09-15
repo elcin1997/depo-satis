@@ -1,7 +1,11 @@
 package com.example.deposervice.dto.response;
 
+import jakarta.validation.constraints.NotNull;
+
 public class MehsulReponse {
+
     private Long id;
+
     private String marka;
     private  String katiqoriya;
     private Integer say;
