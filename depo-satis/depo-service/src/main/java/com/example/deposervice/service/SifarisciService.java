@@ -2,6 +2,7 @@ package com.example.deposervice.service;
 
 import com.example.deposervice.dto.requset.SifarisciRequset;
 import com.example.deposervice.dto.response.SifarisciResponse;
+import com.example.deposervice.exeption.SifarisNotFound;
 import com.example.deposervice.mapper.SifarisciMapper;
 import com.example.deposervice.repository.SifariscIRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,13 @@ public class SifarisciService {
         return  mapper.ciferisciToSifarsiciResponse(sifarisci);
     }
     public SifarisciResponse update(Long id,SifarisciRequset requset){
-        var entitiy =sifariscIRepository.findById(id).orElseThrow(()-> new RuntimeException("bu idli sifarisci yoxdur"));
+        var entitiy =sifariscIRepository.findById(id).orElseThrow(()-> new SifarisNotFound("bele bir istifadeci movcud deyil"));
         entitiy=mapper.sifarisciRequsetToSifarisci(requset);
         entitiy.setId(id);
         return mapper.ciferisciToSifarsiciResponse(entitiy);
     }
     public  SifarisciResponse getSifarisciById(Long id){
+        var sifarisci1 =sifariscIRepository.findById(id).orElseThrow(()->new SifarisNotFound("bele bir istifadeci movcud deyil"));
         var sifarisci =sifariscIRepository.findById(id).get();
         return mapper.ciferisciToSifarsiciResponse(sifarisci);
 

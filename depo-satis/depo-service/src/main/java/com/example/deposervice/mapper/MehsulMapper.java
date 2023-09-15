@@ -14,7 +14,7 @@ public interface MehsulMapper {
     @Mapping(target = "marka",source = "marka")
     @Mapping(target = "katiqoriya",source = "katiqoriya")
     @Mapping(target = "say",source ="say")
-    Mehsul mehsulRequsetToMehsul(MehsulRequset requset);
+    Mehsul  mehsulRequsetToMehsul(MehsulRequset requset);
 
     @Mapping(target = "id",source = "id")
     @Mapping(target = "marka",source = "marka")

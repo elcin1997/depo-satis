@@ -3,7 +3,7 @@ package com.example.deposervice.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Sifarisciler")
+@Table(name = "sifarisciler")
 public class Sifarisci {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

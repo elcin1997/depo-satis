@@ -4,18 +4,22 @@ import com.example.deposervice.dto.requset.MehsulRequset;
 import com.example.deposervice.dto.requset.SifarisciRequset;
 import com.example.deposervice.dto.response.SifarisciResponse;
 import com.example.deposervice.service.SifarisciService;
+import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Sifarisciler")
+@RequestMapping("/sifarisciler")
 @RequiredArgsConstructor
 public class SifarisciController {
     private final SifarisciService sifarisciService;
     @PostMapping
-    private SifarisciResponse cereate(@RequestBody SifarisciRequset requset){
-        return  sifarisciService.cereate(requset);
+    private SifarisciResponse cereate(@RequestBody @Valid SifarisciRequset requset){
+        return new ResponseEntity<> (sifarisciService.cereate(requset), HttpStatus.CREATED).getBody();
     }
     @PutMapping("/{id}")
     private SifarisciResponse update(@PathVariable Long id, @RequestBody SifarisciRequset requset){
